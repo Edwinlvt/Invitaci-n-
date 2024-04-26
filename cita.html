@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invitacion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #ffe0e0;
+            padding: 20px;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #d6336c;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #siButton {
+            background-color: #4CAF50;
+            color: white;
+            margin-left: 20px;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+            margin-left: 20px;
+        }
+
+        #result img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: 20px;
+            animation: float 5s ease-in-out infinite;
+            font-size: 24px;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-850px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h2>¿Quieres salir a ver la pelicula de Spy family?</h2>
+        <button id="siButton">Sí</button>
+        <button id="noButton">No</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const container = document.getElementById('container');
+        const result = document.getElementById('result');
+
+        const frasesGraciosas = [
+            "¿Seguro que no? ¡Piénsalo mejor!",
+            "¡Vamos, no puedes negarte o anya entristese!",
+            "¡Enserio volviste a presionar no, bond vio el futuro y me mostró que disfrutabas!",
+            "¡Enserio sakura, quieres que te envíe a la agente Thorn Princess por ti!",
+            "El agente Forge te está localizando en este momento",
+            "¡Tenemos francotiradores en todo tu alrededor! ¡Estás en la mira en este momento!",
+            "Wuao, hemos llegado hasta aquí",
+            "¿Y si es tu destino decir que sí?",
+            "¡Tú lo pediste anya, dispara! ¡Oh no, anya falló, te libraste esta vez!"
+        ];
+
+        const imageUrls = [
+            "https://es.web.img3.acsta.net/pictures/21/11/22/10/54/0321052.jpg",
+            "https://w0.peakpx.com/wallpaper/355/824/HD-wallpaper-anime-spy-x-family-anya-forger-bond-spy-x-family.jpg",
+            "https://somoskudasai.com/wp-content/uploads/2022/03/spy-x-family-kudasai.jpg",
+            "https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/11/a-split-feature-image-of-yor-and-loid-from-spy-x-family.jpg",
+            "https://m.media-amazon.com/images/I/61lrvuMfTZL.AC_UF894,1000_QL80_DpWeblab.jpg",
+            "https://w0.peakpx.com/wallpaper/837/587/HD-wallpaper-anime-spy-x-family-yor-forger.jpg",
+            "https://w0.peakpx.com/wallpaper/632/1014/HD-wallpaper-anime-spy-x-family-anya-forger.jpg",
+            "https://w0.peakpx.com/wallpaper/764/167/HD-wallpaper-anime-spy-x-family-anya-forger-loid-forger.jpg",
+            "https://w0.peakpx.com/wallpaper/993/330/HD-wallpaper-spy-x-family-loid-anime-anime-loid-folger-manga-spy-x-family.jpg"
+        ];
+
+        document.getElementById('noButton').addEventListener('click', () => {
+            clickCount++;
+            noButton.style.filter = blur(${clickCount / 3}px);
+
+            let randomImageUrl = imageUrls[clickCount % imageUrls.length];
+            result.innerHTML = <p>${frasesGraciosas[clickCount % frasesGraciosas.length]}</p><img src="${randomImageUrl}" width="200px" height="100px">;
+        });
+
+        document.getElementById('siButton').addEventListener('click', () => {
+
+            siButton.style.padding = 15px 30px;
+            siButton.style.fontSize = 18px;
+
+            noButton.style.filter = 'none';
+            clickCount = 0;
+
+            let siImageUrl = "https://w0.peakpx.com/wallpaper/872/970/HD-wallpaper-anime-spy-x-family-anya-forger-thumbnail.jpg"; // URL proporcionado
+            result.innerHTML = <p>Sabía que dirías que sí ❤</p><img src="${siImageUrl}" width="200px" height="100px">;
+            for (let i = 0; i < 300; i++) {
+                createHeart();
+            }
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            document.body.appendChild(heart);
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // Duración entre 3-5s
+            heart.addEventListener('animationend', function () {
+                heart.remove();
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
